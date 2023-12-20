@@ -46,6 +46,7 @@
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>**/*.css</include>
+					<include>**/*.csv</include>
 				</includes>
 			</resource>
 		</resources>
