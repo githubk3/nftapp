@@ -1,0 +1,13 @@
+# File .gitignore
+
+# Bỏ qua thư mục target
+/target/
+
+# Bỏ qua các tệp nhị phân
+*.class
+*.jar
+*.war
+
+# Bỏ qua các tệp IDE
+.idea/
+.vscode/
