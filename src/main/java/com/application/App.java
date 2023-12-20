@@ -18,12 +18,14 @@ public class App extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 		scene = new Scene(loadFXML("Primary"), 640, 480);
+		scene.getStylesheets().add(App.class.getResource("styles/"  + "Primary" + ".css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
 
 	public static void setRoot(String fxml) throws IOException {
 		scene.setRoot(loadFXML(fxml));
+		scene.getStylesheets().add(App.class.getResource("styles/"  + fxml + ".css").toExternalForm());
 	}
 
 	private static Parent loadFXML(String fxml) throws IOException {
