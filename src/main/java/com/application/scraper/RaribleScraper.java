@@ -14,22 +14,35 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.application.service.CSVFileManager;
 
 
-public class OpenseaScraper extends WebScraper {
+public class RaribleScraper extends WebScraper {
 
-	public OpenseaScraper(WebDriver driver) {
+	// jCYSWn
+	// brbJBC: list
+	// 0 .getText: id
+	// 1 > a. href
+	// 1. > img
+	// 1. > cBLZmI : name
+	// 2. getText: floorPrice
+	// 4. getText: volumn
+	// 5. getText: change
+	// 7. getText: sales (thực ra là owners)
+
+	public RaribleScraper(WebDriver driver) {
 		super(driver);
 	}
 
+	@Override
 	public List<String[]> handleScrapingData(String baseUrlResource) {
-		
+
 		List<String[]> data = new ArrayList<>();
 		int count = 0;
-		
-		CSVFileManager filer = new CSVFileManager("E:/WorkSpace/WebScraper/src/main/resources/openseas/opensea-12-12-2023.csv");
-		
-		String[] header =  { "idNFT", "urlNFT", "imageNFT", "nameNFT", "salesNFT", "volumnNFT", "changeNFT",
+
+		CSVFileManager filer = new CSVFileManager(
+				"E:/WorkSpace/WebScraper/src/main/resources/rarible/rarible-17-11-2023.csv");
+
+		String[] header = { "idNFT", "urlNFT", "imageNFT", "nameNFT", "salesNFT", "volumnNFT", "changeNFT",
 				"floorPriceNFT" };
-		
+
 		filer.writeRow(header);
 
 		try {
@@ -39,45 +52,42 @@ public class OpenseaScraper extends WebScraper {
 
 				try {
 					WebDriverWait wait = new WebDriverWait(this.driver, Duration.ofSeconds(2));
-					wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".fWxQZN")));
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".DKpiL")));
 
 					JavascriptExecutor jsExecutor = (JavascriptExecutor) this.driver;
 
 					// Lấy chiều cao ban đầu của trình duyệt
 					long initialHeight = (long) jsExecutor.executeScript("return window.innerHeight");
 
-					List<WebElement> listNTF = this.getListElementByCssSelector(this.driver, ".fWxQZN");
+					List<WebElement> listNTF = this.getListElementByCssSelector(this.driver, ".DKpiL");
 
 					for (WebElement nft : listNTF) {
-						String idNFT = this.getElementByClass(nft, "hHChfp").getText();
-						String urlNFT = this.getElementByTagName(nft, "a").getAttribute("href");
-						String imageNFT = this.getElementByTagName(this.getElementByClass(nft, "dPkIoo"), "img")
-								.getAttribute("src");
-						String nameNFT = this.getElementByClass(this.getElementByClass(nft, "cqKvtL"), "bguyED")
-								.getText();
-						String salesNFT = this.getElementByClass(this.getElementByClass(nft, "cuwMwy"), "axQXd")
-								.getText();
+						List<WebElement> cell = this.getListElementByCssSelector(nft, ".brbJBC");
 
-						List<WebElement> vcfList = this.getListElementByClass(nft, "hcyTCW");
-
-						String volumnNFT = this.getElementByClass(vcfList.get(0), "axQXd").getText();
-						String changeNFT = this.getElementByClass(vcfList.get(1), "axQXd").getText();
-						String floorPriceNFT = this.getElementByClass(vcfList.get(2), "axQXd").getText();
+						String idNFT = cell.get(0).getText();
+						String urlNFT = this.getElementByTagName(cell.get(1), "a").getAttribute("href");
+						String imageNFT = this.getElementByTagName(cell.get(1), "img").getAttribute("src");
+						String nameNFT = this.getElementByClass(cell.get(1), "cBLZmI").getText();
+						String salesNFT = cell.get(7).getText();
+						String volumnNFT = cell.get(4).getText();
+						String changeNFT = cell.get(5).getText();
+						String floorPriceNFT = cell.get(2).getText();
 
 						String[] payload = { idNFT, urlNFT, imageNFT, nameNFT, salesNFT, volumnNFT, changeNFT,
 								floorPriceNFT };
-						
+
 						filer.writeRow(payload);
-						
+
 						data.add(payload);
-						
+
 						count++;
 
-//						System.out.println(idNFT + " - " + imageNFT + " - " + nameNFT + " - " + urlNFT + " - "
-//								+ volumnNFT + " - " + changeNFT + " - " + floorPriceNFT + " - " + salesNFT);
+						System.out.println(idNFT + " - " + imageNFT + " - " + nameNFT + " - " + urlNFT + " - "
+								+ volumnNFT + " - " + changeNFT + " - " + floorPriceNFT + " - " + salesNFT);
 					}
-					
-					if (count >= 200) break;
+
+					if (count >= 200)
+						break;
 
 					// Cuộn trang bằng JavaScript
 					jsExecutor.executeScript("window.scrollBy(0, 700)");
@@ -106,7 +116,7 @@ public class OpenseaScraper extends WebScraper {
 		} finally {
 			this.driver.quit();
 		}
-		
+
 		return data;
 	}
 

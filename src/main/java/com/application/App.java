@@ -27,6 +27,8 @@ public class App extends Application {
 		scene.setRoot(loadFXML(fxml));
 		scene.getStylesheets().add(App.class.getResource("styles/"  + fxml + ".css").toExternalForm());
 	}
+	
+	
 
 	private static Parent loadFXML(String fxml) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/" + fxml + ".fxml"));

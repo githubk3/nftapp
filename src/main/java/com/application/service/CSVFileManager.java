@@ -22,7 +22,7 @@ public class CSVFileManager {
 //	không cần phải thực hiện việc đóng tệp tin trong khối finally. 
 //	Điều này đảm bảo rằng tệp tin sẽ được đóng một cách đúng đắn ngay cả khi có ngoại lệ xảy ra hoặc khi quá 
 //	trình đọc dữ liệu hoàn tất.
-	public List<String[]> readData() {
+	public List<String[]> readAllData() {
 		List<String[]> data = null;
 		try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
 			data = reader.readAll();
@@ -49,7 +49,7 @@ public class CSVFileManager {
 		return data;
 	}
 
-	public void writeData(List<String[]> data) {
+	public void writeAllData(List<String[]> data) {
 		try (CSVWriter writer = new CSVWriter(new FileWriter(filePath))) {
 			writer.writeAll(data);
 		} catch (IOException e) {

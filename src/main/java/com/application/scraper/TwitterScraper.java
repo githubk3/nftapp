@@ -1,8 +1,11 @@
 package com.application.scraper;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,14 +17,14 @@ public class TwitterScraper extends WebScraper {
 		super(driver);
 	}
 
+	@Override
 	public List<String[]> handleScrapingData(String baseUrlResource) {
 		int countTweet = 0;
 		List<String[]> data = new ArrayList<>();
-//		CSVFileManager filer = new CSVFileManager("E:/WorkSpace/WebScraper/src/main/resources/tweets/tweet-18-12-2023.csv");
-//		String[] header = { "id", "urlTweet", "contentTweet", "tweetDate", "commentTweet", "reTweet", "quoteTweet",
-//				"heartTweet" };
-//
-//		filer.writeRow(header);
+		String[] header = { "id", "urlTweet", "contentTweet", "tweetDate", "commentTweet", "reTweet", "quoteTweet",
+				"heartTweet" };
+
+		data.add(header);
 
 		try {
 			this.driver.get(baseUrlResource);
@@ -47,6 +50,9 @@ public class TwitterScraper extends WebScraper {
 						String contentTweet = this.getElementByClass(item, "tweet-content").getText();
 						String tweetDate = this.getElementByTagName(this.getElementByClass(item, "tweet-date"), "a")
 								.getAttribute("title");
+						
+						// convert datetime
+						tweetDate = this.convertDatetime(tweetDate);
 
 						// get list element tweet stat
 						List<WebElement> listTweetStatElement = this.getListElementByClass(item, "tweet-stat");
@@ -62,8 +68,6 @@ public class TwitterScraper extends WebScraper {
 
 						String[] payload = { String.valueOf(countTweet), urlTweet, contentTweet, tweetDate,
 								commentTweet, reTweet, quoteTweet, heartTweet };
-						
-//						filer.writeRow(payload);
 
 						data.add(payload);
 
@@ -102,5 +106,21 @@ public class TwitterScraper extends WebScraper {
 		}
 
 		return data;
+	}
+	
+	public String convertDatetime(String datetime) {
+		try {
+			 String inputDateTime = datetime;
+	         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy '·' h:mm a z",  Locale.ENGLISH);
+	         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+	         LocalDateTime dateTime = LocalDateTime.parse(inputDateTime, inputFormatter);
+	         String outputDate = dateTime.format(outputFormatter);
+	         
+	        return outputDate;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
 	}
 }
