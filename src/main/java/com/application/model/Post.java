@@ -44,12 +44,12 @@ public class Post {
 	
 	// todo 
 	public void addTag(String tag) {
-
+		tags.add(tag);
 	}
 
 	// todo
 	public void addTag(List<String> tag) {
-
+		tags.addAll(tag);
 	}
 
 }
