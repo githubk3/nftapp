@@ -18,15 +18,26 @@ public class NFT {
 		this.gateway = gateway;
 	}
 	
+	public NFT(int id, String name, String url, String image, String gateway, NFTInterval nftInterval)
+	{
+		this.id = id;
+		this.name = name;
+		this.url = url;
+		this.image = image;
+		this.gateway = gateway;
+		
+		nftIntervalList.add(nftInterval);
+	}
+	
 	// to do
 	public void addNftIntervalList(NFTInterval nftInterval) {
 		nftIntervalList.add(nftInterval);
 	}
 	
 	// to do
-//	public List<NFTInterval> getListNFTInterval(){
-//		
-//	}
+	public List<NFTInterval> getNftIntervalList(){
+		return nftIntervalList;
+	}
 
 	public int getId() {
 		return id;
