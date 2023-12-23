@@ -25,6 +25,7 @@ public class CSVFileManager {
 	public List<String[]> readAllData() {
 		List<String[]> data = null;
 		try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
+			reader.skip(1); // Bỏ qua dòng header
 			data = reader.readAll();
 		} catch (IOException e) {
 			e.printStackTrace();

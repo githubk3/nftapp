@@ -8,17 +8,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * JavaFX App
- */
 public class App extends Application {
 
 	private static Scene scene;
 
 	@Override
 	public void start(Stage stage) throws IOException {
-		scene = new Scene(loadFXML("Home"), 640, 480);
-		scene.getStylesheets().add(App.class.getResource("styles/"  + "Primary" + ".css").toExternalForm());
+		scene = new Scene(loadFXML("Intro"), 640, 480);
+		scene.getStylesheets().add(App.class.getResource("styles/"  + "Intro" + ".css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -27,8 +24,6 @@ public class App extends Application {
 		scene.setRoot(loadFXML(fxml));
 		scene.getStylesheets().add(App.class.getResource("styles/"  + fxml + ".css").toExternalForm());
 	}
-	
-	
 
 	private static Parent loadFXML(String fxml) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/" + fxml + ".fxml"));

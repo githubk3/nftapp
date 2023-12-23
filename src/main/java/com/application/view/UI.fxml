@@ -14,7 +14,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="593.0" stroke="BLACK" strokeType="INSIDE" width="345.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="593.0" layoutX="4.0" stroke="BLACK" strokeType="INSIDE" width="345.0" />
       <Text fill="WHITE" layoutX="40.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Digital NFT" wrappingWidth="221.6708984375">
          <font>
             <Font name="Montserrat SemiBold" size="43.0" />
