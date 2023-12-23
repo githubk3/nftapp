@@ -8,44 +8,23 @@ import java.util.stream.Collectors;
 import com.application.service.LoadDataManager;
 
 public class Bucket implements IPostManager, INFTManager {
-	private static List<Post> listPost = new ArrayList<Post>();
-	private static List<NFT> listNFT = new ArrayList<NFT>();
+	private List<Post> listPost = new ArrayList<Post>();
+	private List<NFT> listNFT = new ArrayList<NFT>();
 	private final LoadDataManager loader = new LoadDataManager();
 
 	public Bucket() {
-		List<Post> listTweetData = loader.loadDataTweet(""); // source dist
+		List<Post> listTweetData = loader.loadDataTweet("/tweet/tweet-23-12-2023.csv"); 
 		this.addPost(listTweetData);
 
-		List<NFT> listNFTData1 = loader.loadDataNFT(""); // source
+		List<NFT> listNFTData1 = loader.loadDataNFT("/opensea/opensea-22-12-2023.csv"); 
 		this.addNFT(listNFTData1);
+		
+		List<NFT> listNFTData2 = loader.loadDataNFT("/binance/binance-22-12-2023.csv"); 
+		this.addNFT(listNFTData2);
+		
+		List<NFT> listNFTData3 = loader.loadDataNFT("/rarible/rarible-22-12-2023.csv"); 
+		this.addNFT(listNFTData3);
 	}
-
-//	public static void main(String[] args)
-//	{
-//		listPost = new ArrayList<Post>(Arrays.asList(
-//				new Tweet(0, "https://ahehe/user1.com", "Mua đê, mua đê #nftdeptrai #nftsiu", "1/2/2023", 30, 10, 100,1000),
-//				new Tweet(1, "https://ahehe/user2.com", "Mua nhanh #nftdeptrai #nftiu", "1/2/2023", 30, 10, 100,3200),
-//				new Tweet(2, "https://ahehe/user3.com", "Đừng mua đm #nftdeptrai #nftsiu", "1/2/2023", 30, 10, 100,100),
-//				new Tweet(3, "https://ahehe/user4.com", "Đào lửa tổng hợp P1 #nftthief #nftsiu", "12/5/2023", 0, 0, 1,342),
-//				new Tweet(4, "https://ahehe/user4.com", "Đào lửa tổng hợp P2 #nftgrand #nftauto", "14/5/2023", 0, 0, 1,342),
-//				new Tweet(5, "https://ahehe/user4.com", "Đào lửa tổng hợp P3 #nftDungMua #nftKhongmua", "15/5/2023", 0, 0, 1,342)
-//		));
-//		
-//		listNFT.addAll(Arrays.asList(
-//				new NFT(0,"deptrai","https://opensea/user1.com", "//url...", "OpenSea"),
-//				new NFT(1,"xautrai","https://opensea/user1.com", "//url...", "OpenSea"),
-//				new NFT(2,"Bambo","https://opensea/user3.com", "//url...", "Binary"),
-//				new NFT(3,"Airline","https://opensea/user3.com", "//url...", "Binary")
-//		));
-//		
-//		listNFT.get(0).addNftIntervalList(new NFTInterval(10, 20, 30, 40, 50, "1/2/2023"));
-//		listNFT.get(0).addNftIntervalList(new NFTInterval(10, 20, 40, 40, 50, "2/2/2023"));
-//		listNFT.get(0).addNftIntervalList(new NFTInterval(10, 20, 50, 40, 50, "3/2/2023"));
-//		
-//		listNFT.get(1).addNftIntervalList(new NFTInterval(10, 20, 15, 40, 50, "1/2/2023"));
-//		listNFT.get(1).addNftIntervalList(new NFTInterval(10, 20, 40, 40, 50, "2/2/2023"));
-//		listNFT.get(1).addNftIntervalList(new NFTInterval(10, 20, 50, 40, 50, "3/2/2023"));
-//	}
 
 	@Override
 	public void addNFT(NFT nft) {
@@ -54,7 +33,7 @@ public class Bucket implements IPostManager, INFTManager {
 
 	@Override
 	public void addNFT(List<NFT> nft) {
-		listNFT.addAll(listNFT);
+		listNFT.addAll(nft);
 	}
 
 	@Override

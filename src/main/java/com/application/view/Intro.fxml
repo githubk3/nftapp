@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="323.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.controller.IntroController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="593.0" stroke="BLACK" strokeType="INSIDE" width="397.0" styleClass="intro__container"/>
+      <Text fill="WHITE" layoutX="50.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Digital NFT" wrappingWidth="221.6708984375">
+         <font>
+            <Font name="Montserrat SemiBold" size="43.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="60.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marketplace" wrappingWidth="272.9250183105469">
+         <font>
+            <Font name="Montserrat ExtraBold" size="33.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="63.0" layoutY="217.0" opacity="0.82" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcom to">
+         <font>
+            <Font name="Montserrat Medium" size="27.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="207.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NFT">
+         <font>
+            <Font name="Montserrat ExtraBold" size="33.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="50.0" layoutY="293.0" opacity="0.82" strokeType="OUTSIDE" strokeWidth="0.0" text="Discover and Finding what you want here about NFTs on The World" wrappingWidth="244.4072265625">
+         <font>
+            <Font name="Montserrat Medium" size="15.0" />
+         </font>
+      </Text>
+      <Button fx:id="startBtn" layoutX="151.0" layoutY="415.0" mnemonicParsing="false" onAction="#switchToHome" styleClass="btn__start" text="Get Started" textFill="BLACK">
+         <font>
+            <Font name="Montserrat SemiBold" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

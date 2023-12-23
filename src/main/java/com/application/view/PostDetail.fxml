@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="495.0" prefWidth="497.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Text layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Created at: 20/11/2023" wrappingWidth="189.205078125" />
+      <Text layoutX="14.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I'm looking to buy the most original #NFT 👀🔥 #NFTs #GameFi #Metaverse #NFTCommunity" wrappingWidth="306.0" />
+      <Label layoutX="26.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="comment" />
+      <ImageView fitHeight="251.0" fitWidth="474.0" layoutX="14.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="https://nitter.net/pic/orig/media%2FGB85mOJaAAAahYd.jpg" />
+         </image>
+      </ImageView>
+      <Text layoutX="48.0" layoutY="474.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20" />
+      <Label layoutX="145.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="quote" />
+      <Label layoutX="145.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="10" />
+      <Label layoutX="237.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="retweet" />
+      <Label layoutX="237.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="8" />
+      <Label layoutX="337.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="heart" />
+      <Label layoutX="344.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="9" />
+   </children>
+</AnchorPane>
