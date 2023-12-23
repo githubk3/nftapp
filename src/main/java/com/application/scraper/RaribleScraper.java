@@ -11,9 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.application.service.CSVFileManager;
-
-
 public class RaribleScraper extends WebScraper {
 
 	// jCYSWn
@@ -37,14 +34,11 @@ public class RaribleScraper extends WebScraper {
 		List<String[]> data = new ArrayList<>();
 		int count = 0;
 
-		CSVFileManager filer = new CSVFileManager(
-				"E:/WorkSpace/WebScraper/src/main/resources/rarible/rarible-17-11-2023.csv");
-
 		String[] header = { "idNFT", "urlNFT", "imageNFT", "nameNFT", "salesNFT", "volumnNFT", "changeNFT",
 				"floorPriceNFT" };
 
-		filer.writeRow(header);
-
+		data.add(header);
+		
 		try {
 			this.driver.get(baseUrlResource);
 
@@ -57,7 +51,7 @@ public class RaribleScraper extends WebScraper {
 					JavascriptExecutor jsExecutor = (JavascriptExecutor) this.driver;
 
 					// Lấy chiều cao ban đầu của trình duyệt
-					long initialHeight = (long) jsExecutor.executeScript("return window.innerHeight");
+					long initialHeight = (long) jsExecutor.executeScript("return document.body.scrollHeight");
 
 					List<WebElement> listNTF = this.getListElementByCssSelector(this.driver, ".DKpiL");
 
@@ -76,8 +70,6 @@ public class RaribleScraper extends WebScraper {
 						String[] payload = { idNFT, urlNFT, imageNFT, nameNFT, salesNFT, volumnNFT, changeNFT,
 								floorPriceNFT };
 
-						filer.writeRow(payload);
-
 						data.add(payload);
 
 						count++;
@@ -86,21 +78,18 @@ public class RaribleScraper extends WebScraper {
 								+ volumnNFT + " - " + changeNFT + " - " + floorPriceNFT + " - " + salesNFT);
 					}
 
-					if (count >= 200)
-						break;
-
 					// Cuộn trang bằng JavaScript
-					jsExecutor.executeScript("window.scrollBy(0, 700)");
+					jsExecutor.executeScript("window.scrollBy(0, 1000)");
 
 					// Dừng lại trong một khoảng thời gian ngắn để trang tải dữ liệu mới
 					Thread.sleep(4000);
 
 					// Lấy chiều cao hiện tại của trình duyệt
-					long currentHeight = (long) jsExecutor.executeScript("return window.innerHeight");
+					long currentHeight = (long) jsExecutor.executeScript("return document.body.scrollHeight");
 
 					// Kiểm tra xem trang có còn dữ liệu để cuộn hay không. Nếu không còn thì
-					if (currentHeight >= initialHeight) {
-//						 break;
+					if (currentHeight == initialHeight || count >= 200) {
+						 break;
 					} else {
 						initialHeight = currentHeight;
 					}

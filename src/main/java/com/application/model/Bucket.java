@@ -1,9 +1,6 @@
 package com.application.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.MonthDay;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,18 +8,18 @@ import java.util.stream.Collectors;
 import com.application.service.LoadDataManager;
 
 public class Bucket implements IPostManager, INFTManager {
-	static private List<Post> listPost = new ArrayList<>();
-	static private List<NFT> listNFT = new ArrayList<NFT>();
+	private static List<Post> listPost = new ArrayList<Post>();
+	private static List<NFT> listNFT = new ArrayList<NFT>();
 	private final LoadDataManager loader = new LoadDataManager();
-	
+
 	public Bucket() {
 		List<Post> listTweetData = loader.loadDataTweet(""); // source dist
 		this.addPost(listTweetData);
-		
+
 		List<NFT> listNFTData1 = loader.loadDataNFT(""); // source
 		this.addNFT(listNFTData1);
 	}
-	
+
 //	public static void main(String[] args)
 //	{
 //		listPost = new ArrayList<Post>(Arrays.asList(
@@ -54,7 +51,7 @@ public class Bucket implements IPostManager, INFTManager {
 	public void addNFT(NFT nft) {
 		listNFT.add(nft);
 	}
-	
+
 	@Override
 	public void addNFT(List<NFT> nft) {
 		listNFT.addAll(listNFT);
@@ -62,34 +59,28 @@ public class Bucket implements IPostManager, INFTManager {
 
 	@Override
 	public ArrayList<NFT> getNFTsByGateway(String gateway) {
-		
-		 return listNFT.stream()
-				 	.filter(nft -> nft.getGateway().equals(gateway))
-				 	.collect(Collectors.toCollection(ArrayList::new));
+
+		return listNFT.stream().filter(nft -> nft.getGateway().equals(gateway))
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	@Override
 	public ArrayList<NFT> getNFTsByName(String name) {
-		
-		return listNFT.stream()
-			 		.filter(nft -> nft.getName().equals(name))
-			 		.collect(Collectors.toCollection(ArrayList::new));
+
+		return listNFT.stream().filter(nft -> nft.getName().equals(name))
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	@Override
 	public double calculateTotalVolume(String gateway, String datetime) {
-		
+
 		Double totalVolume = (double) 0;
-		for (NFT nft : listNFT)
-		{
-			totalVolume += 
-					nft.getNftIntervalList()
-						.stream()
-						.filter(nftInterval -> nftInterval.getDatetime().equals(datetime))
-						.mapToDouble(NFTInterval::getVolume)
-						.sum();
+		for (NFT nft : listNFT) {
+			totalVolume += nft.getNftIntervalList().stream()
+					.filter(nftInterval -> nftInterval.getDatetime().equals(datetime))
+					.mapToDouble(NFTInterval::getVolume).sum();
 		}
-		
+
 		return totalVolume;
 	}
 
@@ -97,7 +88,7 @@ public class Bucket implements IPostManager, INFTManager {
 	public void addPost(Post post) {
 		listPost.add(post);
 	}
-	
+
 	@Override
 	public void addPost(List<Post> post) {
 		listPost.addAll(post);
@@ -105,67 +96,56 @@ public class Bucket implements IPostManager, INFTManager {
 
 	@Override
 	public ArrayList<Post> getPostsByTag(String tag) {
-		return listPost.stream()
-				.filter(post -> post.getTags()
-										.stream()
-										.anyMatch(str -> str.equals(tag)))
+		return listPost.stream().filter(post -> post.getTags().stream().anyMatch(str -> str.equals(tag)))
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	@Override
 	public ArrayList<Post> getPostsByKeyWord(String keyword) {
-		return listPost.stream()
-						.filter(post -> post.getContent().contains(keyword))
-						.collect(Collectors.toCollection(ArrayList::new));
+		return listPost.stream().filter(post -> post.getContent().contains(keyword))
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	@Override
 	public ArrayList<String> getTagHot(int day, int month, int year) {
-		
+
 		Map<String, Integer> tagCountMap = new HashMap<>();
 		int maxTagCount = 0;
-		
-		String date = (day != -1) ?  
-						day + "/" + month + "/" + year :
-						month + "/" + year;
-		
-		DateTimeFormatter formart = day != -1 ?
-				DateTimeFormatter.ofPattern("d/M/yyyy") :
-				DateTimeFormatter.ofPattern("M/yyyy");
-		
+
+		String date = (day != -1) ? day + "/" + month + "/" + year : month + "/" + year;
+
+		DateTimeFormatter formart = day != -1 ? DateTimeFormatter.ofPattern("d/M/yyyy")
+				: DateTimeFormatter.ofPattern("M/yyyy");
+
 		DateTimeFormatter formartOfPost = DateTimeFormatter.ofPattern("d/M/yyyy");
-		
-		for (Post post : listPost)  {						
-			if (date.equals(formart.format(
-					LocalDate.parse(post.getDatetime(), formartOfPost))))
-			{
+
+		for (Post post : listPost) {
+			if (date.equals(formart.format(LocalDate.parse(post.getDatetime(), formartOfPost)))) {
 				for (String tag : post.getTags()) {
 					int tagCount = tagCountMap.getOrDefault(tag, 0) + 1;
 					tagCountMap.put(tag, tagCount);
 					maxTagCount = Integer.max(maxTagCount, tagCount);
 				}
 			}
-		};
-		
+		}
+		;
+
 		ArrayList<String> listTagHot = new ArrayList<String>();
-		for (Post post :listPost)
-		{
-			for (String tag : post.getTags())
-			{
-				if (tagCountMap.getOrDefault(tag, 0) == maxTagCount)
-				{
+		for (Post post : listPost) {
+			for (String tag : post.getTags()) {
+				if (tagCountMap.getOrDefault(tag, 0) == maxTagCount) {
 					listTagHot.add(tag);
 					tagCountMap.put(tag, 0);
-				}			
+				}
 			}
 		}
-		
+
 		return listTagHot;
 	}
-	
+
 	@Override
 	public ArrayList<String> getTagHot(int month, int year) {
 		return getTagHot(-1, month, year);
 	}
-	
+
 }

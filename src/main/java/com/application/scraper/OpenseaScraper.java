@@ -11,9 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.application.service.CSVFileManager;
-
-
 public class OpenseaScraper extends WebScraper {
 
 	public OpenseaScraper(WebDriver driver) {
@@ -23,15 +20,12 @@ public class OpenseaScraper extends WebScraper {
 	public List<String[]> handleScrapingData(String baseUrlResource) {
 		
 		List<String[]> data = new ArrayList<>();
-		int count = 0;
-		
-		CSVFileManager filer = new CSVFileManager("E:/WorkSpace/WebScraper/src/main/resources/openseas/opensea-12-12-2023.csv");
 		
 		String[] header =  { "idNFT", "urlNFT", "imageNFT", "nameNFT", "salesNFT", "volumnNFT", "changeNFT",
 				"floorPriceNFT" };
 		
-		filer.writeRow(header);
-
+		data.add(header);
+		
 		try {
 			this.driver.get(baseUrlResource);
 
@@ -44,7 +38,9 @@ public class OpenseaScraper extends WebScraper {
 					JavascriptExecutor jsExecutor = (JavascriptExecutor) this.driver;
 
 					// Lấy chiều cao ban đầu của trình duyệt
-					long initialHeight = (long) jsExecutor.executeScript("return window.innerHeight");
+					long initialHeight = (long) jsExecutor.executeScript("return document.body.scrollHeight");
+					
+					System.out.println("initHeight:::" + initialHeight);
 
 					List<WebElement> listNTF = this.getListElementByCssSelector(this.driver, ".fWxQZN");
 
@@ -67,30 +63,26 @@ public class OpenseaScraper extends WebScraper {
 						String[] payload = { idNFT, urlNFT, imageNFT, nameNFT, salesNFT, volumnNFT, changeNFT,
 								floorPriceNFT };
 						
-						filer.writeRow(payload);
-						
 						data.add(payload);
 						
-						count++;
-
-//						System.out.println(idNFT + " - " + imageNFT + " - " + nameNFT + " - " + urlNFT + " - "
-//								+ volumnNFT + " - " + changeNFT + " - " + floorPriceNFT + " - " + salesNFT);
+						System.out.println(idNFT + " - " + imageNFT + " - " + nameNFT + " - " + urlNFT + " - "
+								+ volumnNFT + " - " + changeNFT + " - " + floorPriceNFT + " - " + salesNFT);
 					}
 					
-					if (count >= 200) break;
-
 					// Cuộn trang bằng JavaScript
-					jsExecutor.executeScript("window.scrollBy(0, 700)");
+					jsExecutor.executeScript("window.scrollBy(0, 1000)");
 
 					// Dừng lại trong một khoảng thời gian ngắn để trang tải dữ liệu mới
-					Thread.sleep(4000);
+					Thread.sleep(1000);
 
 					// Lấy chiều cao hiện tại của trình duyệt
-					long currentHeight = (long) jsExecutor.executeScript("return window.innerHeight");
+					long currentHeight = (long) jsExecutor.executeScript("return document.body.scrollHeight");
+					
+					System.out.println("currentHeight:::" + currentHeight);
 
 					// Kiểm tra xem trang có còn dữ liệu để cuộn hay không. Nếu không còn thì
 					if (currentHeight >= initialHeight) {
-//						 break;
+						 break;
 					} else {
 						initialHeight = currentHeight;
 					}

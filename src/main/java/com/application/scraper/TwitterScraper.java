@@ -21,8 +21,8 @@ public class TwitterScraper extends WebScraper {
 	public List<String[]> handleScrapingData(String baseUrlResource) {
 		int countTweet = 0;
 		List<String[]> data = new ArrayList<>();
-		String[] header = { "id", "urlTweet", "contentTweet", "tweetDate", "commentTweet", "reTweet", "quoteTweet",
-				"heartTweet" };
+		String[] header = { "id", "urlTweet", "contentTweet", "imageTweet", "tweetDate", "commentTweet", "reTweet",
+				"quoteTweet", "heartTweet" };
 
 		data.add(header);
 
@@ -50,7 +50,11 @@ public class TwitterScraper extends WebScraper {
 						String contentTweet = this.getElementByClass(item, "tweet-content").getText();
 						String tweetDate = this.getElementByTagName(this.getElementByClass(item, "tweet-date"), "a")
 								.getAttribute("title");
-						
+
+						String imageTweet = this.getElementByClass(item, "still-image") != null
+								? this.getElementByClass(item, "still-image").getAttribute("href")
+								: "";
+
 						// convert datetime
 						tweetDate = this.convertDatetime(tweetDate);
 
@@ -66,15 +70,17 @@ public class TwitterScraper extends WebScraper {
 						String heartTweet = this.getElementByClass(listTweetStatElement.get(3), "icon-container")
 								.getText();
 
-						String[] payload = { String.valueOf(countTweet), urlTweet, contentTweet, tweetDate,
+						String[] payload = { String.valueOf(countTweet), urlTweet, contentTweet, imageTweet, tweetDate,
 								commentTweet, reTweet, quoteTweet, heartTweet };
+
+						System.out.println(countTweet + "-" + urlTweet + "-" + imageTweet);
 
 						data.add(payload);
 
 						countTweet++;
 					}
 
-					if (countTweet >= 100)
+					if (countTweet >= 200)
 						break;
 
 					// Cuộn trang bằng JavaScript
@@ -107,17 +113,17 @@ public class TwitterScraper extends WebScraper {
 
 		return data;
 	}
-	
+
 	public String convertDatetime(String datetime) {
 		try {
-			 String inputDateTime = datetime;
-	         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy '·' h:mm a z",  Locale.ENGLISH);
-	         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			String inputDateTime = datetime;
+			DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy '·' h:mm a z", Locale.ENGLISH);
+			DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-	         LocalDateTime dateTime = LocalDateTime.parse(inputDateTime, inputFormatter);
-	         String outputDate = dateTime.format(outputFormatter);
-	         
-	        return outputDate;
+			LocalDateTime dateTime = LocalDateTime.parse(inputDateTime, inputFormatter);
+			String outputDate = dateTime.format(outputFormatter);
+
+			return outputDate;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";

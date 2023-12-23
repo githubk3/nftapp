@@ -15,19 +15,21 @@ public class ScraperMain {
 		
 		WebDriver driver1 = new ChromeDriver();
 		WebScraper web1 = new TwitterScraper(driver1);
-		scraping(web1, "https://nitter.net/search?f=tweets&q=%23nft&since=&until=&near=", baseDist + "/tweet/tweet-20-12-2023.csv");
+		scraping(web1, "https://nitter.net/search?f=tweets&q=%23nft&since=&until=&near=", baseDist + "/tweet/tweet-23-12-2023.csv");
 		
-		WebDriver driver2 = new ChromeDriver();
-		WebScraper web2 = new OpenseaScraper(driver2);
-		scraping(web2, "https://nitter.net/search?f=tweets&q=%23nft&since=&until=&near=", baseDist + "/opensea/opensea-20-12-2023.csv");
+//		WebDriver driver2 = new ChromeDriver();
+//		WebScraper web2 = new OpenseaScraper(driver2);
+//		scraping(web2, "https://opensea.io/rankings/trending?sortBy=seven_day_volume", baseDist + "/opensea/opensea-15-12-2023.csv");
+//		
+//		WebDriver driver3 = new ChromeDriver();
+//		WebScraper web3 = new BinanceScraper(driver3);
+//		scraping(web3, "https://www.binance.com/vi/nft/ranking?tab=trend", baseDist + "/binance/binance-15-12-2023.csv");
 		
-		WebDriver driver3 = new ChromeDriver();
-		WebScraper web3 = new BinanceScraper(driver3);
-		scraping(web3, "https://nitter.net/search?f=tweets&q=%23nft&since=&until=&near=", baseDist + "/binance/binance-20-12-2023.csv");
-		
-		WebDriver driver4 = new ChromeDriver();
-		WebScraper web4 = new RaribleScraper(driver4);
-		scraping(web4, "https://nitter.net/search?f=tweets&q=%23nft&since=&until=&near=", baseDist + "/rarible/rarible-20-12-2023.csv");
+//		WebDriver driver4 = new ChromeDriver();
+//		WebScraper web4 = new RaribleScraper(driver4);
+//		scraping(web4, "https://rarible.com/explore/all/collections?period=WEEK", baseDist + "/rarible/rarible-15-12-2023.csv");
+//		https://rarible.com/explore/all/collections?period=WEEK
+// 		https://rarible.com/explore/all/collections
 		
 	}
 	
