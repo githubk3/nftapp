@@ -12,55 +12,41 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="858.0" prefWidth="976.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-	<children>
-		<TextField layoutX="14.0" layoutY="68.0" prefHeight="39.0" prefWidth="358.0" />
-		<Button layoutX="526.0" layoutY="68.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="77.0" text="Search" />
-		<ScrollPane layoutY="121.0" prefHeight="754.0" prefWidth="976.0">
-			<content>
-				<TableView prefHeight="749.0" prefWidth="973.0">
-					<columns>
-						<TableColumn prefWidth="75.0" text="id" />
-						<TableColumn prefWidth="170.0" text="url" />
-						<TableColumn minWidth="0.0" prefWidth="0.0" text="reTweet" />
-						<TableColumn prefWidth="177.0" text="name" />
-						<TableColumn minWidth="0.0" prefWidth="147.0" text="comment" />
-						<TableColumn minWidth="0.0" prefWidth="110.0" text="quote" />
-                  <TableColumn prefWidth="116.0" text="retweet" />
-                  <TableColumn minWidth="0.0" prefWidth="88.0" text="heart" />
-					</columns>
-				</TableView>
-			</content>
-		</ScrollPane>
-		<MenuBar layoutX="14.0" layoutY="14.0" prefHeight="39.0" prefWidth="274.0">
-			<menus>
-				<Menu mnemonicParsing="false" text="Intro">
-					<items>
-						<MenuItem mnemonicParsing="false" />
-					</items>
-				</Menu>
-				<Menu mnemonicParsing="false" text="Post">
-					<items>
-						<MenuItem mnemonicParsing="false" text="Delete" />
-					</items>
-				</Menu>
-				<Menu mnemonicParsing="false" text="Tag">
-					<items>
-						<MenuItem mnemonicParsing="false" text="About" />
-					</items>
-				</Menu>
-            <Menu mnemonicParsing="false" text="NFT">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
-               </items>
-            </Menu>
-			</menus>
-		</MenuBar>
-      <MenuButton layoutX="372.0" layoutY="68.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="130.0" text="keyword">
-        <items>
-          <MenuItem mnemonicParsing="false" text="keyword" />
-          <MenuItem mnemonicParsing="false" text="tag" />
-        </items>
-      </MenuButton>
-	</children>
+<AnchorPane prefHeight="858.0" prefWidth="976.0"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.application.controller.PostController">
+	<TextField layoutX="14.0" layoutY="68.0" prefHeight="39.0"
+		prefWidth="358.0" />
+	<Button layoutX="526.0" layoutY="68.0" mnemonicParsing="false"
+		prefHeight="39.0" prefWidth="77.0" text="Search" />
+	<ScrollPane layoutY="121.0" prefHeight="754.0"
+		prefWidth="976.0">
+		<content>
+			<TableView prefHeight="749.0" prefWidth="973.0">
+				<columns>
+					<TableColumn prefWidth="75.0" text="id" />
+					<TableColumn prefWidth="170.0" text="url" />
+					<TableColumn minWidth="0.0" prefWidth="0.0"
+						text="reTweet" />
+					<TableColumn prefWidth="177.0" text="name" />
+					<TableColumn minWidth="0.0" prefWidth="147.0"
+						text="comment" />
+					<TableColumn minWidth="0.0" prefWidth="110.0"
+						text="quote" />
+					<TableColumn prefWidth="116.0" text="retweet" />
+					<TableColumn minWidth="0.0" prefWidth="173.0"
+						text="heart" />
+				</columns>
+			</TableView>
+		</content>
+	</ScrollPane>
+	
+	<MenuButton layoutX="372.0" layoutY="68.0"
+		mnemonicParsing="false" prefHeight="39.0" prefWidth="130.0"
+		text="keyword">
+		<items>
+			<MenuItem mnemonicParsing="false" text="keyword" />
+			<MenuItem mnemonicParsing="false" text="tag" />
+		</items>
+	</MenuButton>
 </AnchorPane>

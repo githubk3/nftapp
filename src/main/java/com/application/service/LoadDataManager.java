@@ -10,11 +10,11 @@ import com.application.model.Post;
 import com.application.model.Tweet;
 
 public class LoadDataManager {
-	private final String baseDist = String.valueOf(App.class.getResource("data")).substring(6);
+	private final String BASE_DIST = String.valueOf(App.class.getResource("data")).substring(6);
 
 	public List<Post> loadDataTweet(String sourcePath) {
 		try {
-			CSVFileManager filer = new CSVFileManager(baseDist + sourcePath);
+			CSVFileManager filer = new CSVFileManager(BASE_DIST + sourcePath);
 
 			List<String[]> data = filer.readAllData();
 			List<Post> listTweet = new ArrayList<>();
@@ -23,13 +23,14 @@ public class LoadDataManager {
 				int idTweet = Integer.valueOf(item[0]);
 				String urlTweet = item[1];
 				String contentTweet = item[2];
+				String imageTweet = item[3];
 				String tweetDate = item[4];
 				int commentTweet = item[5] != "" ? Integer.valueOf(item[5].replace(",", "")) : 0;
 				int reTweet = item[6] != ""  ? Integer.valueOf(item[6].replace(",", "")) : 0;
 				int quoteTweet = item[7] != "" ? Integer.valueOf(item[7].replace(",", "")) : 0;
 				int heartTweet = item[8] != "" ? Integer.valueOf(item[8].replace(",", "")) : 0;
 
-				Tweet tweet = new Tweet(idTweet, urlTweet, contentTweet, tweetDate, commentTweet, reTweet, quoteTweet,
+				Tweet tweet = new Tweet(idTweet, urlTweet, contentTweet, imageTweet, tweetDate, commentTweet, reTweet, quoteTweet,
 						heartTweet);
 				listTweet.add(tweet);
 			}
@@ -44,7 +45,7 @@ public class LoadDataManager {
 
 	public List<NFT> loadDataNFT(String sourcePath) {
 		try {
-			CSVFileManager filer = new CSVFileManager(baseDist + sourcePath);
+			CSVFileManager filer = new CSVFileManager(BASE_DIST + sourcePath);
 
 			List<String[]> data = filer.readAllData();
 			List<NFT> listNFT = new ArrayList<>();
@@ -55,9 +56,9 @@ public class LoadDataManager {
 				String image = item[2];
 				String name = item[3];
 				int sales = item[4].contains("K") ? Integer.valueOf(item[4].replaceAll("[,|%|ETH|>|<|K|.]", "").replaceAll("--", "0"))*100 : Integer.valueOf(item[4].replaceAll("[,|%|ETH|>|<]", "").replaceAll("--", "0"));
-				double volume = Double.valueOf(item[5].replaceAll("[,|%|ETH|>|<|MAIC]", "").replaceAll("K", "000"));
+				double volume = Double.valueOf(item[5].replaceAll("[,|%|ETH|>|<|MAIC|BNB]", "").replaceAll("K", "000"));
 				double change = Double.valueOf(item[6].replaceAll("[,|%|ETH|>|<]", "").replaceAll("—", "0"));
-				double floorPrice = Double.valueOf(item[7].replaceAll("[,|%|ETH|PRIM|>|<|~|AC]", "").replaceAll("—", "0"));
+				double floorPrice = Double.valueOf(item[7].replaceAll("[,|%|ETH|PRIM|>|<|~|AC|BNB]", "").replaceAll("—", "0") != "" ? item[7].replaceAll("[,|%|ETH|PRIM|>|<|~|AC|BNB]", "").replaceAll("—", "0"):"0");
 				String gateway = item[8];
 				String datetime = item[9];
 

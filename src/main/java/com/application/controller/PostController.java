@@ -12,4 +12,9 @@ public class PostController {
         App.setRoot("Intro");
     }
 	
+	@FXML
+    private void switchToNFT() throws IOException {
+        App.setRoot("NFT");
+    }
+	
 }

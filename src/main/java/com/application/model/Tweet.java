@@ -10,9 +10,9 @@ public class Tweet extends Post implements ITag {
 	private int totalQuote;
 	private int totalHeart;
 
-	public Tweet(int id, String url, String content, String datetime, int totalComment, int totalReTweet,
+	public Tweet(int id, String url, String content, String image, String datetime, int totalComment, int totalReTweet,
 			int totalQuote, int totalHeart) {
-		super(id, url, content, datetime);
+		super(id, url, content, image, datetime);
 		this.totalComment = totalComment;
 		this.totalReTweet = totalReTweet;
 		this.totalQuote = totalQuote;

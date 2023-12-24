@@ -13,16 +13,16 @@ public class Bucket implements IPostManager, INFTManager {
 	private final LoadDataManager loader = new LoadDataManager();
 
 	public Bucket() {
-		List<Post> listTweetData = loader.loadDataTweet("/tweet/tweet-23-12-2023.csv"); 
+		List<Post> listTweetData = loader.loadDataTweet("/tweet/tweet-23-12-2023.csv");
 		this.addPost(listTweetData);
 
-		List<NFT> listNFTData1 = loader.loadDataNFT("/opensea/opensea-22-12-2023.csv"); 
+		List<NFT> listNFTData1 = loader.loadDataNFT("/opensea/opensea-22-12-2023.csv");
 		this.addNFT(listNFTData1);
-		
-		List<NFT> listNFTData2 = loader.loadDataNFT("/binance/binance-22-12-2023.csv"); 
+
+		List<NFT> listNFTData2 = loader.loadDataNFT("/binance/binance-22-12-2023.csv");
 		this.addNFT(listNFTData2);
-		
-		List<NFT> listNFTData3 = loader.loadDataNFT("/rarible/rarible-22-12-2023.csv"); 
+
+		List<NFT> listNFTData3 = loader.loadDataNFT("/rarible/rarible-22-12-2023.csv");
 		this.addNFT(listNFTData3);
 	}
 
@@ -52,14 +52,27 @@ public class Bucket implements IPostManager, INFTManager {
 
 	@Override
 	public double calculateTotalVolume(String gateway, String datetime) {
+		List<NFT> listNFTByDate = new ArrayList<NFT>();
+		
+		List<NFT> listNFTData1 = loader.loadDataNFT("/" + gateway + "/" + gateway + "-" + datetime + ".csv");
+		listNFTByDate.addAll(listNFTData1);
+		
+		String editDatetime = datetime.replaceAll("-", "/");
 
 		Double totalVolume = (double) 0;
-		for (NFT nft : listNFT) {
-			totalVolume += nft.getNftIntervalList().stream()
-					.filter(nftInterval -> nftInterval.getDatetime().equals(datetime))
-					.mapToDouble(NFTInterval::getVolume).sum();
+		for (NFT nft : listNFTByDate)
+		{
+			if (nft.getGateway().equals(gateway))
+			{
+				totalVolume += 
+						nft.getNftIntervalList()
+							.stream()
+							.filter(nftInterval -> nftInterval.getDatetime().equals(editDatetime))
+							.mapToDouble(NFTInterval::getVolume)
+							.sum();
+			}
 		}
-
+		
 		return totalVolume;
 	}
 
