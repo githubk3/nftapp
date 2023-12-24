@@ -43,8 +43,6 @@ public class TagScreen extends JFrame {
 
     public static void main(String[] args) {
         Bucket bucket1 = new Bucket();
-        System.out.println(bucket1.getTagHot(12,2023));
-
         new TagScreen(bucket1);
     }
 }

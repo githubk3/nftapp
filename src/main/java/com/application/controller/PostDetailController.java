@@ -11,8 +11,6 @@ import javafx.scene.text.Text;
 public class PostDetailController {
     private Post post;
     public PostDetailController(Post post){this.post = post;}
-
-
     @FXML
     private Text comment;
 
@@ -43,7 +41,6 @@ public class PostDetailController {
         quote.setText(String.valueOf(tweet.getTotalQuote()));
         reTweet.setText(String.valueOf(tweet.getTotalReTweet()));
         heart.setText(String.valueOf(tweet.getTotalHeart()));
-
     }
 
 }

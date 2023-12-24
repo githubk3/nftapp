@@ -8,22 +8,55 @@
 
 <AnchorPane prefHeight="923.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="name" layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Azuki" wrappingWidth="189.205078125" />
-      <Text fx:id="rank" layoutX="14.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank: 1" wrappingWidth="306.0" />
-      <Label layoutX="26.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="sales" />
-      <ImageView fx:id="image" fitHeight="251.0" fitWidth="474.0" layoutX="14.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+      <Text fx:id="name" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Azuki" wrappingWidth="543.2050476074219">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Text>
+      <Text fx:id="rank" layoutX="14.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank: 1" wrappingWidth="306.0">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font></Text>
+      <Label layoutX="26.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="Sales">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <ImageView fx:id="image" fitHeight="251.0" fitWidth="474.0" layoutX="14.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="https://i.seadn.io/gae/H8jOCJuQokNqGBpkBN5wk1oZwO7LM8bNnrHCaekV2nKjnCqw6UB5oaH8XyNeBDj6bA_n1mjejzhFQUP3O1NfjFLHr3FOaeHcTOOT?auto=format&amp;dpr=1&amp;w=3840" />
          </image>
       </ImageView>
-      <Text fx:id="sales" layoutX="48.0" layoutY="474.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20" />
-      <Label layoutX="145.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="volume" />
-      <Label fx:id="volumn" layoutX="145.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="10" />
-      <Label layoutX="237.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="change" />
-      <Label fx:id="change" layoutX="237.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="8" />
-      <Label layoutX="337.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="floorPrice" />
-      <Label fx:id="floorPrice" layoutX="344.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="9" />
-      <Text fx:id="datetime" layoutX="14.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datetime: 23/12/2023" wrappingWidth="189.205078125" />
+      <Text fx:id="sales" layoutX="30.0" layoutY="474.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Label layoutX="120.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="Volumn">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label fx:id="volumn" layoutX="125.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="10">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="248.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="Change">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label fx:id="change" layoutX="264.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="8">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="387.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="Floor Price">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label fx:id="floorPrice" layoutX="393.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="9">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Text fx:id="datetime" layoutX="14.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datetime: 23/12/2023" wrappingWidth="189.205078125">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font></Text>
       <LineChart layoutX="14.0" layoutY="498.0">
          <xAxis>
             <CategoryAxis side="BOTTOM" />
@@ -32,5 +65,20 @@
             <NumberAxis side="LEFT" />
          </yAxis>
       </LineChart>
+      <Label layoutX="176.0" layoutY="454.0" prefHeight="27.0" prefWidth="31.0" text="ETH">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="454.0" layoutY="454.0" prefHeight="27.0" prefWidth="31.0" text="ETH">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="299.0" layoutY="454.0" prefHeight="27.0" prefWidth="31.0" text="\%">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
