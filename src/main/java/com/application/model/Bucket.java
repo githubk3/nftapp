@@ -6,6 +6,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.application.service.LoadDataManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Bucket implements IPostManager, INFTManager {
 	private List<Post> listPost = new ArrayList<Post>();
@@ -37,17 +39,18 @@ public class Bucket implements IPostManager, INFTManager {
 	}
 
 	@Override
-	public ArrayList<NFT> getNFTsByGateway(String gateway) {
-
-		return listNFT.stream().filter(nft -> nft.getGateway().equals(gateway))
+	public ObservableList<NFT> getNFTsByGateway(String gateway) {
+		ArrayList<NFT> filterList = listNFT.stream().filter(nft -> nft.getGateway().equals(gateway))
 				.collect(Collectors.toCollection(ArrayList::new));
+		return FXCollections.observableArrayList(filterList);
 	}
 
 	@Override
-	public ArrayList<NFT> getNFTsByName(String name) {
+	public ObservableList<NFT> getNFTsByName(String name) {
 
-		return listNFT.stream().filter(nft -> nft.getName().equals(name))
+		ArrayList<NFT> filterList = listNFT.stream().filter(nft -> nft.getName().equals(name))
 				.collect(Collectors.toCollection(ArrayList::new));
+		return FXCollections.observableArrayList(filterList);
 	}
 
 	@Override
@@ -74,56 +77,71 @@ public class Bucket implements IPostManager, INFTManager {
 	}
 
 	@Override
-	public ArrayList<Post> getPostsByTag(String tag) {
-		return listPost.stream().filter(post -> post.getTags().stream().anyMatch(str -> str.equals(tag)))
+	public ObservableList<Post> getPostsByTag(String tag) {
+		ArrayList<Post> filterList = listPost.stream().filter(post -> post.getTags().stream().anyMatch(str -> str.equals(tag)))
 				.collect(Collectors.toCollection(ArrayList::new));
+		return FXCollections.observableArrayList(filterList);
 	}
 
 	@Override
-	public ArrayList<Post> getPostsByKeyWord(String keyword) {
-		return listPost.stream().filter(post -> post.getContent().contains(keyword))
+	public ObservableList<Post> getPostsByKeyWord(String keyword) {
+		ArrayList<Post> filterList = listPost.stream().filter(post -> post.getContent().contains(keyword))
 				.collect(Collectors.toCollection(ArrayList::new));
+		return FXCollections.observableArrayList(filterList);
 	}
 
 	@Override
-	public ArrayList<String> getTagHot(int day, int month, int year) {
+	public ObservableList<String> getTagHot(int day, int month, int year) {
 
 		Map<String, Integer> tagCountMap = new HashMap<>();
 		int maxTagCount = 0;
 
-		String date = (day != -1) ? day + "/" + month + "/" + year : month + "/" + year;
+		String date = (day != -1) ?
+				day + "/" + month + "/" + year :
+				month + "/" + year;
 
-		DateTimeFormatter formart = day != -1 ? DateTimeFormatter.ofPattern("d/M/yyyy")
-				: DateTimeFormatter.ofPattern("M/yyyy");
+		DateTimeFormatter formart = day != -1 ?
+				DateTimeFormatter.ofPattern("d/M/yyyy") :
+				DateTimeFormatter.ofPattern("M/yyyy");
 
 		DateTimeFormatter formartOfPost = DateTimeFormatter.ofPattern("d/M/yyyy");
 
-		for (Post post : listPost) {
-			if (date.equals(formart.format(LocalDate.parse(post.getDatetime(), formartOfPost)))) {
-				for (String tag : post.getTags()) {
+		for (Post post : listPost)  {
+			if (date.equals(formart.format(
+					LocalDate.parse(post.getDatetime(), formartOfPost))))
+			{
+				for (String tag : post.getTags())
+				{
 					int tagCount = tagCountMap.getOrDefault(tag, 0) + 1;
 					tagCountMap.put(tag, tagCount);
 					maxTagCount = Integer.max(maxTagCount, tagCount);
 				}
 			}
-		}
-		;
+		};
 
 		ArrayList<String> listTagHot = new ArrayList<String>();
-		for (Post post : listPost) {
-			for (String tag : post.getTags()) {
-				if (tagCountMap.getOrDefault(tag, 0) == maxTagCount) {
-					listTagHot.add(tag);
-					tagCountMap.put(tag, 0);
-				}
+
+		//Chuyển Map thành List entry
+		List<Map.Entry<String, Integer>> MapToList = new ArrayList<>(tagCountMap.entrySet());
+		//Sort lại list vừa tạo
+		Collections.sort(MapToList, (entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+
+		int count = 0;
+		//Lấy ra 10 phần tử đầu tiên
+		for (Map.Entry<String, Integer> entry : MapToList) {
+			if (count >= 10) {
+				break;
 			}
+			listTagHot.add(entry.getKey());
+			count++;
 		}
 
-		return listTagHot;
+
+		return FXCollections.observableArrayList(listTagHot);
 	}
 
 	@Override
-	public ArrayList<String> getTagHot(int month, int year) {
+	public ObservableList<String> getTagHot(int month, int year) {
 		return getTagHot(-1, month, year);
 	}
 

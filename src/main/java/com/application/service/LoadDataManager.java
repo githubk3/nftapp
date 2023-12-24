@@ -23,13 +23,14 @@ public class LoadDataManager {
 				int idTweet = Integer.valueOf(item[0]);
 				String urlTweet = item[1];
 				String contentTweet = item[2];
+				String imageTweet = item[3];
 				String tweetDate = item[4];
 				int commentTweet = item[5] != "" ? Integer.valueOf(item[5].replace(",", "")) : 0;
 				int reTweet = item[6] != ""  ? Integer.valueOf(item[6].replace(",", "")) : 0;
 				int quoteTweet = item[7] != "" ? Integer.valueOf(item[7].replace(",", "")) : 0;
 				int heartTweet = item[8] != "" ? Integer.valueOf(item[8].replace(",", "")) : 0;
 
-				Tweet tweet = new Tweet(idTweet, urlTweet, contentTweet, tweetDate, commentTweet, reTweet, quoteTweet,
+				Tweet tweet = new Tweet(idTweet, urlTweet, contentTweet, imageTweet, tweetDate, commentTweet, reTweet, quoteTweet,
 						heartTweet);
 				listTweet.add(tweet);
 			}

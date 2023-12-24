@@ -1,38 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.chart.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="923.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="923.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Azuki" wrappingWidth="189.205078125" />
-      <Text layoutX="14.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank: 1" wrappingWidth="306.0" />
+      <Text fx:id="name" layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Azuki" wrappingWidth="189.205078125" />
+      <Text fx:id="rank" layoutX="14.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank: 1" wrappingWidth="306.0" />
       <Label layoutX="26.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="sales" />
-      <ImageView fitHeight="251.0" fitWidth="474.0" layoutX="14.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="image" fitHeight="251.0" fitWidth="474.0" layoutX="14.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="https://i.seadn.io/gae/H8jOCJuQokNqGBpkBN5wk1oZwO7LM8bNnrHCaekV2nKjnCqw6UB5oaH8XyNeBDj6bA_n1mjejzhFQUP3O1NfjFLHr3FOaeHcTOOT?auto=format&amp;dpr=1&amp;w=3840" />
          </image>
       </ImageView>
-      <Text layoutX="48.0" layoutY="474.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20" />
+      <Text fx:id="sales" layoutX="48.0" layoutY="474.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20" />
       <Label layoutX="145.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="volume" />
-      <Label layoutX="145.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="10" />
+      <Label fx:id="volumn" layoutX="145.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="10" />
       <Label layoutX="237.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="change" />
-      <Label layoutX="237.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="8" />
+      <Label fx:id="change" layoutX="237.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="8" />
       <Label layoutX="337.0" layoutY="427.0" prefHeight="27.0" prefWidth="83.0" text="floorPrice" />
-      <Label layoutX="344.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="9" />
-      <Text layoutX="14.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datetime: 23/12/2023" wrappingWidth="189.205078125" />
+      <Label fx:id="floorPrice" layoutX="344.0" layoutY="454.0" prefHeight="27.0" prefWidth="83.0" text="9" />
+      <Text fx:id="datetime" layoutX="14.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datetime: 23/12/2023" wrappingWidth="189.205078125" />
       <LineChart layoutX="14.0" layoutY="498.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
+         <xAxis>
+            <CategoryAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
       </LineChart>
    </children>
 </AnchorPane>

@@ -7,6 +7,7 @@ public class Post {
 	private int id;
 	private String url;
 	private String content;
+	private String image;
 	private String datetime;
 	private List<String> tags = new ArrayList<>();
 	
@@ -14,10 +15,11 @@ public class Post {
 		
 	}
 
-	public Post(int id, String url, String content, String datetime) {
+	public Post(int id, String url, String content, String image, String datetime) {
 		this.id = id;
 		this.url = url;
 		this.content = content;
+		this.image = image;
 		this.datetime = datetime;
 	}
 	
@@ -41,8 +43,11 @@ public class Post {
 		return this.tags;
 	}
 
-	
-	// todo 
+	public String getImage() {
+		return image;
+	}
+
+	// todo
 	public void addTag(String tag) {
 		tags.add(tag);
 	}
