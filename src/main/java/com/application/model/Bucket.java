@@ -16,11 +16,17 @@ public class Bucket implements IPostManager, INFTManager {
 	private final LoadDataManager loader = new LoadDataManager();
 	
 	public Bucket() {
-		List<Post> listTweetData = loader.loadDataTweet(""); // source dist
+		List<Post> listTweetData = loader.loadDataTweet("/tweet/tweet-23-12-2023.csv"); 
 		this.addPost(listTweetData);
-		
-		List<NFT> listNFTData1 = loader.loadDataNFT(""); // source
+
+		List<NFT> listNFTData1 = loader.loadDataNFT("/opensea/opensea-22-12-2023.csv"); 
 		this.addNFT(listNFTData1);
+		
+		List<NFT> listNFTData2 = loader.loadDataNFT("/binance/binance-22-12-2023.csv"); 
+		this.addNFT(listNFTData2);
+		
+		List<NFT> listNFTData3 = loader.loadDataNFT("/rarible/rarible-22-12-2023.csv"); 
+		this.addNFT(listNFTData3);
 	}
 	
 //	public static void main(String[] args) 
