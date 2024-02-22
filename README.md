@@ -1,6 +1,4 @@
-<h1>Sau khi clone dự án về máy thì ta sẽ thực hiện các bước sau để import maven project</h1<>
-<br/>
-
+### Sau khi clone dự án về máy thì ta sẽ thực hiện các bước sau để import maven project <br/>
 -   B1: Mở Eclipse trên máy tính của bạn.
 -   B2: Chọn File > Import trong menu chính của Eclipse. <br>
     Trong cửa sổ Import, chọn Maven > Existing Maven Projects và nhấn Next.<br>
